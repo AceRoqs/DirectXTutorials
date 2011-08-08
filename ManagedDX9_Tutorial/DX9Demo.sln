@@ -1,0 +1,69 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1_Basic", "1_BasicDemo\1_Basic.csproj", "{7F9D1436-251C-47CD-8FCD-0B152C972DA1}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2_VertexBuffer", "2_VertexBuffer\2_VertexBuffer.csproj", "{CAEA9A04-882C-4515-A42A-97AFB22F8986}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3_IndexBuffer", "3_IndexBuffer\3_IndexBuffer.csproj", "{0B2599B7-D724-4F03-96E5-A2AD643CC511}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4_Texture", "4_Texture\4_Texture.csproj", "{1C96DABF-C79E-4044-AAE0-4D46978AA764}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5_Cube", "5_Cube\5_Cube.csproj", "{72598A99-F1DF-41E9-89AC-9541F00DF504}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6_ShaderAsm", "6_ShaderAsm\6_ShaderAsm.csproj", "{E1B13314-E3E5-4065-9F3E-1B2906D525D6}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7_ShaderHLSL", "7_ShaderHLSL\7_ShaderHLSL.csproj", "{D229E0FA-3F38-4D26-86E7-C563EA3302FC}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{7F9D1436-251C-47CD-8FCD-0B152C972DA1}.Debug.ActiveCfg = Debug|.NET
+		{7F9D1436-251C-47CD-8FCD-0B152C972DA1}.Debug.Build.0 = Debug|.NET
+		{7F9D1436-251C-47CD-8FCD-0B152C972DA1}.Release.ActiveCfg = Release|.NET
+		{7F9D1436-251C-47CD-8FCD-0B152C972DA1}.Release.Build.0 = Release|.NET
+		{CAEA9A04-882C-4515-A42A-97AFB22F8986}.Debug.ActiveCfg = Debug|.NET
+		{CAEA9A04-882C-4515-A42A-97AFB22F8986}.Debug.Build.0 = Debug|.NET
+		{CAEA9A04-882C-4515-A42A-97AFB22F8986}.Release.ActiveCfg = Release|.NET
+		{CAEA9A04-882C-4515-A42A-97AFB22F8986}.Release.Build.0 = Release|.NET
+		{0B2599B7-D724-4F03-96E5-A2AD643CC511}.Debug.ActiveCfg = Debug|.NET
+		{0B2599B7-D724-4F03-96E5-A2AD643CC511}.Debug.Build.0 = Debug|.NET
+		{0B2599B7-D724-4F03-96E5-A2AD643CC511}.Release.ActiveCfg = Release|.NET
+		{0B2599B7-D724-4F03-96E5-A2AD643CC511}.Release.Build.0 = Release|.NET
+		{1C96DABF-C79E-4044-AAE0-4D46978AA764}.Debug.ActiveCfg = Debug|.NET
+		{1C96DABF-C79E-4044-AAE0-4D46978AA764}.Debug.Build.0 = Debug|.NET
+		{1C96DABF-C79E-4044-AAE0-4D46978AA764}.Release.ActiveCfg = Release|.NET
+		{1C96DABF-C79E-4044-AAE0-4D46978AA764}.Release.Build.0 = Release|.NET
+		{72598A99-F1DF-41E9-89AC-9541F00DF504}.Debug.ActiveCfg = Debug|.NET
+		{72598A99-F1DF-41E9-89AC-9541F00DF504}.Debug.Build.0 = Debug|.NET
+		{72598A99-F1DF-41E9-89AC-9541F00DF504}.Release.ActiveCfg = Release|.NET
+		{72598A99-F1DF-41E9-89AC-9541F00DF504}.Release.Build.0 = Release|.NET
+		{E1B13314-E3E5-4065-9F3E-1B2906D525D6}.Debug.ActiveCfg = Debug|.NET
+		{E1B13314-E3E5-4065-9F3E-1B2906D525D6}.Debug.Build.0 = Debug|.NET
+		{E1B13314-E3E5-4065-9F3E-1B2906D525D6}.Release.ActiveCfg = Release|.NET
+		{E1B13314-E3E5-4065-9F3E-1B2906D525D6}.Release.Build.0 = Release|.NET
+		{D229E0FA-3F38-4D26-86E7-C563EA3302FC}.Debug.ActiveCfg = Debug|.NET
+		{D229E0FA-3F38-4D26-86E7-C563EA3302FC}.Debug.Build.0 = Debug|.NET
+		{D229E0FA-3F38-4D26-86E7-C563EA3302FC}.Release.ActiveCfg = Release|.NET
+		{D229E0FA-3F38-4D26-86E7-C563EA3302FC}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

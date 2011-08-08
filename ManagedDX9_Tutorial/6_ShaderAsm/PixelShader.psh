@@ -1,0 +1,10 @@
+ps.1.1
+;=========================================================================
+; PixelShader.psh
+; Coder: Thobias Jones
+; Copyright (c) 2003 Thobias Jones. All rights reserved.
+; Purpose: Simple assembly pixel shader
+;=========================================================================
+
+tex t0              ; Sample texture
+mul r0, t0, v0      ; Multiply texture color with interpolated diffuse color

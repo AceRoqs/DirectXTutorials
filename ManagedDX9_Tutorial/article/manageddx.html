@@ -1,0 +1,1453 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Toby Jones Jones">
+<meta name="copyright" content="© 2003-2011 Toby Jones">
+<meta name="description" content="Managed DirectX 9 Graphics: Improving On A Good Thing">
+
+<style type="text/css">
+a
+{
+    color:              #4F4FAF;
+    text-decoration:    underline;
+    font-weight:        bold;
+}
+
+a:visited
+{
+    color:              #4F4FAF;
+}
+
+a:hover
+{
+    color:              #4F4FAF;
+    background:         #EFEFFF;
+}
+
+a.anchor
+{
+    color:              #208060;
+    font-size:          16pt;
+}
+
+body
+{
+    margin-left:        0.0in;
+    margin-right:       0.0in;
+    margin-top:         0.0in;
+    font-family:        Verdana, Arial, Helvetica, serif;
+    font-size:          10pt;
+    color:              black;
+    background:         white;
+}
+
+table.tabs
+{
+    margin-left:        0in;
+    margin-right:       0in;
+    font-family:        Arial, Helvetica, serif;
+    font-size:          8pt;
+    color:              white;
+    background:         black;
+    width:              600px;
+}
+
+td
+{
+    font-size:          10pt;
+}
+
+td.sidebar
+{
+    color:              black;
+    background:         #CFCFFF;
+    font-size:          10pt;
+    width:              200pt;
+}
+
+td.content
+{
+    width:              600pt;
+}
+
+td.blue
+{
+    width:              200pt;
+    background:         #4F4FAF;
+}
+
+address
+{
+    text-align:         center;
+    text-decoration:    none;
+    font-style:         normal;
+    font-weight:        normal;
+    font-size:          7pt;
+}
+
+span.g
+{
+    text-decoration:    none;
+    color:              #4F4FAF;
+    font-size:          13pt;
+    font-family:        Verdana, serif;
+    font-weight:        normal;
+}
+
+pre
+{
+    font-size: 8pt;
+    color: Blue
+}
+
+img.right
+{
+    float:              right;
+}
+</style>
+</head>
+
+<body>
+
+<table cellpadding="0" cellspacing="0" width="800">
+<tbody><tr>
+<td class="sidebar">
+</td>
+<td class="content" valign="top">
+<table class="tabs" border="0" cellpadding="2" cellspacing="0" frame="vsides">
+ <tbody><tr>
+ <td class="content"><br>
+ </td>
+ </tr>
+</tbody></table>
+</td>
+</tr>
+
+<tr><td align="center" valign="top" class="sidebar"><br>
+<br>
+<a href="https://secure.bmtmicro.com/ECommerce-OffSite/13200000.html">Buy TurboHex NOW</a><br>
+(Only $29.95)
+
+ </td> <td class="content" valign="top">
+
+<table cellpadding="5" width="600">
+
+<tbody><tr><td colspan="2">
+<span class="g">Managed DirectX 9 Graphics: Improving On A Good Thing</span><br>
+<b>By Thobias Jones</b>
+
+<p>
+<i>
+Discuss this article or Managed DirectX in our <a href="">forums</a>!<br>
+Download <a href="">the code</a> for this article (330 KByte Download)
+
+</i>
+</p>
+
+<p>
+In late 1999, Microsoft released DirectX 8, introducing a straightforward and easy-to-use API as well
+as adding support for limited programmability. Months passed, and while the API from a graphics
+standpoint was compelling, there remained a lack of books and articles on the subject. For a long
+time,
+<a href="http://www.gamedev.net/reference/articles/article1247.asp">my tutorial</a>
+on GameDev showing how to get started with DirectX 8 was one of the few articles filling
+the void. You can think of this article as the second edition. :)
+</p>
+
+<p>
+Since then, Microsoft has given us DirectX 9, which among other features has given us support for
+full programmability, a high level shading language, and support for the .NET framework. Support
+for these features is welcome, but the documentation, especially for <b>Managed DirectX</b> is
+fairly minimal, and this is what we are going to correct now. Managed DirectX adds support for
+DirectX to the .NET framework.
+</p>
+
+<p>
+The big change is that today we are going to use C# instead of C++. Why C#? While C++ can be used
+with Managed DirectX, C# is the core language of .NET, and Managed DirectX was designed with C# in
+mind. It also gives us a simpler syntax and garbage collection. So what is the advantage of
+using Managed DirectX over regular DirectX? Simplicity. The less code we have to write, the more
+time we can spend on actual stuff like game development. Resource management is reduced and the
+syntax is streamlined. Features like stronger type safety and IntelliSense add to this speed.
+</p>
+
+<p>
+But is Managed DirectX ready for prime time? A large downside is that the .NET framework must be
+distributed with your application (about 25 MB), since the .NET framework does not have a large
+user penetration yet. This certainly discourages its use in shareware games, which need a smaller
+downloadable. The other concern is speed. Managed DirectX is based on the .NET framework, which
+is more abstracted and may not perform as well as C++. Since Managed DirectX is mostly pushing
+commands to the GPU, it is generally not the bottleneck. The designers if Managed DirectX expect
+the speed to be within 95% of regular DirectX. Writing tools or code that is not speed
+critical would definitely benefit from Managed DirectX. However, writing a large game in a
+managed languages such as C# might be difficult.
+</p>
+
+<p>
+This article assumes some knowledge of a graphics API and knowledge of a programming language
+such as C++ or Java. C# experience is helpful, but the examples should be easy enough to follow.
+The Managed DirectX SDK is required, but Microsoft initially shipped a botched version that had
+an expiration. You can download the
+<a href="">corrected SDK</a>.
+</p>
+
+<p>
+<b>Our Basic Application (1_BasicDemo.cs)</b>
+
+</p>
+
+<p>
+I will present several demos along the way. To simplify things, each demo will be built on the
+previous demo.
+</p>
+
+<p>
+A Windows Form is an object oriented abstraction of a window and is .NET's style of window
+management. In our code we create a new Form just as we would create any other object and
+its constructor gets called.
+The basic application we will start with is a simple C# skeleton that creates a form and calls
+a pair of methods, <i>InitDirect3D</i> and <i>DrawScene</i>. The first 70 lines
+or so of each demo use basic principles that you can find in
+<a href="http://amzn.to/qeHj3n">Petzold</a>,
+so I won't reproduce them here. The demos are all the same up until this point.
+</p>
+
+<p>
+Type names in .NET can be quite long, and one thing to note is that most of the types in
+the demos are fully qualified to be clear. We will add the DirectX and Direct3D namespaces to the
+demo as follows, to reduce the names as much as we can while still being clear:
+</p>
+
+<pre>    using Microsoft.DirectX;
+    using Direct3D = Microsoft.DirectX.Direct3D;
+</pre>
+
+<p>
+The first line introduces the <i>Microsoft.DirectX</i> namespace to the application. This gives
+us Vectors and Matrices that we can use unqualified. The second line creates an alias for the
+Direct3D namespace, so that we do not have to use <i>Microsoft.DirectX.Direct3D</i> every time
+we need a type from that namespace.
+
+</p>
+
+<p>
+Let us start our initialization code in <i>InitDirect3D</i>, which is called after the form is
+created. <i>InitDirect3D</i> and <i>DrawScene</i> are methods that will change as we move
+forward, so be sure to experiment with them. The first step is to create a Direct3D device, but
+that cannot be done until we know a bit more about what kind of device we want to create.
+</p>
+
+<pre>    Direct3D.PresentParameters presentParams;
+    presentParams = new Direct3D.PresentParameters();
+
+    presentParams.Windowed         = true;
+    presentParams.SwapEffect       = Direct3D.SwapEffect.Copy;
+</pre>
+
+<p>
+<i>PresentParameters</i> describes information such as the format of display surfaces, the type of
+swapping mechanism, and whether the app is windowed or full screen.
+</p>
+
+<p>In this example, the swap method is copying instead of page flipping
+because the demo is windowed. The back buffer is set to match the
+surface of the current video mode. A surface represents an area that
+can be drawn upon. Surfaces have properties like resolution and color
+depth. It is important that our back buffer and our primary buffer
+match in these properties.
+</p>
+
+<p>
+Windowed programs are great, but most games run in full screen mode. Full screen is easy to
+do, and the only change that is necessary is to create the proper <i>PresentParameters</i>
+
+before the device object is created.
+</p>
+
+<pre>    Direct3D.PresentParameters presentParams;
+    presentParams = new Direct3D.PresentParameters();
+
+    presentParams.Windowed         = false;
+    presentParams.SwapEffect       = Direct3D.SwapEffect.Flip;
+    presentParams.BackBufferFormat =
+        Direct3D.Manager.Adapters.Default.CurrentDisplayMode.Format;
+    presentParams.BackBufferWidth  =
+        Direct3D.Manager.Adapters.Default.CurrentDisplayMode.Width;
+    presentParams.BackBufferHeight =
+        Direct3D.Manager.Adapters.Default.CurrentDisplayMode.Height;
+    presentParams.FullScreenRefreshRateInHz =
+        Direct3D.PresentParameters.DefaultPresentRate;
+    presentParams.PresentationInterval      = Direct3D.PresentInterval.One;
+</pre>
+
+<p>
+Here we see that we change the swap effect to flip so that we are
+page flipping instead of copying the back buffer. You can continue to
+copy if you wish. For example, you may want to do this for antialiasing
+purposes.
+</p>
+
+<p>
+Since we control the whole screen, the back buffer now requires a height and width to
+determine how big to make the screen. We also set the refresh rate and the presentation
+speed, which is how often to page flip. We flip once every screen refresh, instead of
+immediately, so that our images don't tear.
+</p>
+
+<p>
+When demos are run in full screen mode, you can exit the demo by pressing Alt+F4.
+</p>
+
+<p>We can now create a device object. A member variable must be added:</p>
+
+<pre>    private Direct3D.Device device = null;
+</pre>
+
+<p>And the device object is instantiated:</p>
+
+<pre>    device = new Direct3D.Device(0,
+                                 Direct3D.DeviceType.Hardware,
+                                 this,
+                                 Direct3D.CreateFlags.SoftwareVertexProcessing,
+                                 presentParams);
+</pre>
+
+<p>
+This constructor has five parameters, but luckily, none of them are
+complex. The first parameter is the device number, and zero tells DirectX
+to use the primary monitor.
+This is only an issue if we are using a multi-monitor system. We can
+use a secondary monitor by specifying the number of the monitor we
+wish to use. We can get the number of adapters in the system by creating
+a <i>Direct3D.AdapterListEnumerator</i> object and calling the <i>Count</i>
+method.
+</p>
+
+<p>
+The next parameter, <i>Hardware</i>, tells DirectX to
+use the GPU for display purposes. Other options include
+<i>Reference</i> and <i>Software</i>,
+which are the reference software rasterizer and a user
+specified software rasterizer respectively. Usually we will want to
+use the GPU, but we may want to use reference rasterizer for
+some testing purposes. We certainly should ship with the GPU version.
+</p>
+
+<p>
+We then specify which form will be rendered. For a full screen application,
+this needs to be a top-level window.
+</p>
+
+<p>
+
+<i>SoftwareVertexProcessing</i> specifies the type of vertex
+processing. You can also use <i>HardwareVertexProcessing</i> or
+<i>MixedVertexProcessing</i>, but we chose software for maximum compatibility,
+though it is unlikely that any DirectX 9 level cards do not support hardware
+processing.
+We will want to use hardware vertex processing if we want hardware assisted
+T &amp; L.
+</p>
+
+<p>
+Finally, we pass in the <i>presentParams</i> structure and an object reference
+is returned. If an exception is thrown, then its possible that we passed in
+valid parameters, but the device does not support them. To determine the features
+of your card, you can check the <i>Caps</i> structure by calling
+
+<i>Direct3D.Manager.GetDeviceCaps</i>. This is done in the shader demos to
+determine the shader version numbers.
+</p>
+
+<p>
+The nicest part about this method is that it automatically creates
+all our needed back buffers and depth buffers. Clipping is
+automatically enabled, as is back face culling. That is the end of our
+<i>InitDirect3D</i> method. Let's see it in its entirety:
+</p>
+
+<pre>    private readonly bool windowed = true;
+    private Direct3D.Device device = null;
+
+    private void InitDirect3D()
+    {
+        Direct3D.PresentParameters presentParams;
+        presentParams = new Direct3D.PresentParameters();
+
+        presentParams.Windowed = windowed;
+        if(windowed)
+        {
+            presentParams.SwapEffect = Direct3D.SwapEffect.Copy;
+        }
+        else
+        {
+            presentParams.SwapEffect       = Direct3D.SwapEffect.Flip;
+            presentParams.BackBufferFormat =
+                Direct3D.Manager.Adapters.Default.CurrentDisplayMode.Format;
+            presentParams.BackBufferWidth  =
+                Direct3D.Manager.Adapters.Default.CurrentDisplayMode.Width;
+            presentParams.BackBufferHeight =
+                Direct3D.Manager.Adapters.Default.CurrentDisplayMode.Height;
+            presentParams.FullScreenRefreshRateInHz =
+                Direct3D.PresentParameters.DefaultPresentRate;
+            presentParams.PresentationInterval      = Direct3D.PresentInterval.One;
+        }
+
+        device = new Direct3D.Device(0,
+                                     Direct3D.DeviceType.Hardware,
+                                     this,
+                                     Direct3D.CreateFlags.SoftwareVertexProcessing,
+                                     presentParams);
+    }
+</pre>
+
+<p>
+This code is extremely simple, and a lot of the error handling that is done in regular DirectX
+is now handled by exceptions in Managed DirectX. This makes our error handling uniform and
+makes our primary code path very clean.
+</p>
+
+<p>
+We now turn our attention to the <i>DrawScene</i> method. For our first
+demo, we want to just get something on the screen. Once we get to
+this point, adding to it should be trivial.
+</p>
+
+<p>This is the <i>DrawScene</i> method we will start with:</p>
+
+<pre>    private void DrawScene()
+    {
+        device.Clear(Direct3D.ClearFlags.Target,
+                     System.Drawing.Color.CornflowerBlue,
+                     1.0f,
+                     0);
+        device.BeginScene();
+        device.EndScene();
+        device.Present();
+    }
+</pre>
+
+<img width="200" height="205" src="./basic.png" class="right" alt="Basic Demo">
+
+<p>This code is very simple since the error handling is done with
+exceptions. Clear will flood fill the buffers we specify. We can fill
+the z-buffer, the back buffer, or the stencil buffer. In this example,
+we want to fill the back buffer with the color cornflower blue. So we set the
+flags to <i>Direct3D.ClearFlags.Target</i>, and the color to cornflower blue.</p>
+
+<p>
+<i>BeginScene</i> and <i>EndScene</i> don't do anything in this example, but we
+will be using them in future versions. These methods will wrap all of
+our primitive drawing routines.
+</p>
+
+<p>
+The <i>Present</i> method will cycle to the next back buffer. Since we
+only have one back buffer and one front buffer, the buffers simply
+flip. The back buffer will be displayed and we can now draw on the
+front buffer (actually, since we not doing page flipping, we are
+actually still drawing on the back buffer, but the concept is the same,
+and our code does not change).
+</p>
+
+<p>
+If we run the program now, we should get a window that is filled with
+cornflower blue. If everything worked okay, the next section begins
+writing code to draw triangles, the primitive that is the heart of
+3D game programming. But for illustration sake, compare our <i>DrawScene</i>
+method against the C++ version I used in the DirectX 8 tutorial:
+</p>
+
+<!-- Mozilla renders this wrong if images have stylesheets -->
+<table>
+<tbody><tr>
+<td>
+<pre>HRESULT DrawScene()
+{
+    HRESULT hr;
+    do
+    {
+        // clear back buffer
+        hr = pID3DDevice-&gt;Clear(0,
+                                NULL,
+                                D3DCLEAR_TARGET,
+                                D3DCOLOR_RGBA(0,63,0,0),
+                                0,
+                                0);
+        if(FAILED(hr))
+            break;
+
+        // start drawing
+        hr = pID3DDevice-&gt;BeginScene();
+        if(FAILED(hr))
+            break;
+
+        // Put all drawing code here
+
+        hr = pID3DDevice-&gt;EndScene();
+        if(FAILED(hr))
+            break;
+
+        // flip back buffer to front
+        hr = pID3DDevice-&gt;Present(NULL, NULL, NULL, NULL);
+    } while(0);
+
+    return hr;
+}
+</pre>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+This code has exactly the same number of calls, but the presence of error
+handling really adds a lot of mud to what is otherwise clear code. Also, the
+parameter list for <i>Clear</i> is shorter. Managed DirectX with C# can
+cut down the required code in the common case.
+</p>
+
+<p>
+
+<b>Drawing Triangles (2_VertexBufferDemo.cs)</b>
+</p>
+
+<p>Triangles have a few interesting properties that make them
+attractive to 3D programming. They are always planar. A combination of
+triangles can make up any shape. In the upcoming examples, we will use
+triangles to build a cube. I used a rotating cube as the base for my
+first 3D engine. If it's good enough for one programmer, it's good enough
+for another. :)
+</p>
+
+<p>
+In its simplest form, a triangle consists of three vertices. How
+these vertices are defined is up to the programmer. A 2D triangle may
+be as plain as x and y coordinates for each point. A beefy 3D program
+may specify coordinates for position, transformed coordinates, color,
+several texture coordinates, and possibly other information.
+</p>
+
+<p>
+The exact semantics of how to use this information is slightly
+different between OpenGL and Direct3D. Drawing discrete triangles would
+use this information raw and each triangle would be defined separately. However,
+when drawing a model, vertices are shared between triangles, so storing
+all three vertices for each triangle would be inefficient. For both
+OpenGL and Direct3D, we can specify all the vertices of a model in a
+huge array. Triangles are defined as a triple of indices into this
+array. We can take this approach to the extreme by specifying many
+indices in another array, and passing the index array to a method,
+such as <i>DrawIndexedPrimitives</i>, which will draw a large part of the model
+at once (which is exactly what we will do later on).
+</p>
+
+<p>
+We will get this far eventually, but for the next example we will
+just set up the foundations for this approach. In DirectX 8, Microsoft
+introduced the concept of the flexible vertex format. This allowed
+us to define a structure with whatever information we wanted. This
+was a little bit too flexible, and in Managed DirectX 9, many of the
+common vertex formats are already predefined under <i>Direct3D.CustomVertex</i>.
+The vertex format we will use for this example is <i>TransformedColored</i>,
+which is the format used when we have vertices that are already transformed
+(meaning that we won't be doing matrix
+operations) and each vertex has a color associated with it.
+</p>
+
+<p>Go ahead and create a static array of this structure, named <i>m_aVertices</i>,
+defining each of the three vertices for a triangle.</p>
+
+<pre>    private static Direct3D.CustomVertex.TransformedColored[] m_aVertices =
+    {
+        new Direct3D.CustomVertex.TransformedColored(120.0f,
+                                                     120.0f,
+                                                     1.0f,
+                                                     1.0f,
+                                                     0),
+        new Direct3D.CustomVertex.TransformedColored(200.0f,
+                                                     200.0f,
+                                                     1.0f,
+                                                     1.0f,
+                                                     0),
+        new Direct3D.CustomVertex.TransformedColored(30.0f,
+                                                     200.0f,
+                                                     1.0f,
+                                                     1.0f,
+                                                     int.MaxValue),
+    };
+
+</pre>
+
+<p>
+This creates a static array of <i>TransformedColored</i> structures. Since we only have to worry
+about position and color, the parameters are simple. The first four parameters of each
+constructor are the coordinates of a vertex of the triangle. The final coordinate is the
+color, expressed as an integer. There are four coordinates for a vertex because it is
+already transformed into (x,y,z,w) form.
+</p>
+
+<p>
+In our <i>InitDirect3D</i> method, we have to create a vertex buffer. This introduces a
+problem that we didn't have in the first demo. Our device can be "lost" at any moment
+(such as resizing a window), and if this happens, any data that was stored on the GPU
+is lost. For this reason, we have to recreate our vertex buffer every time the device
+is lost. Luckily, Managed DirectX can tell us when our device is lost. Instead of
+creating our vertex buffer in <i>InitDirect3D</i>, we'll create a new method that will
+handle the device lost event:
+
+</p>
+
+<pre>    private Direct3D.VertexBuffer vertexBuffer = null;
+    public void OnDeviceReset(object sender, System.EventArgs e)
+    {
+        Direct3D.Device dev = (Direct3D.Device)sender;
+
+        if(null != vertexBuffer)
+        {
+            vertexBuffer.Dispose();
+        }
+
+        vertexBuffer = new Direct3D.VertexBuffer(
+            m_aVertices[0].GetType(),
+            m_aVertices.Length,
+            dev,
+            Direct3D.Usage.WriteOnly,
+            Direct3D.CustomVertex.TransformedColored.Format,
+            Direct3D.Pool.Default);
+    }
+</pre>
+
+<p>
+In the first pair of parameters, we pass the type and size of our vertex buffer in
+bytes. In C# it would have also been valid to pass
+<i>typeof(Direct3D.CustomVertex.TransformedColored)</i> as the first parameter.
+</p>
+
+<p>
+
+The vertex buffer needs to know what device it is associated with so
+it can hook events on the device. So that information is sent. This brings up an
+interesting situation. The vertex buffer allocates data when it is created, but
+since it hooks events, vertex buffer will never get garbage collected until the device
+is released since there is still
+a reference to it. Every time we need to recreate the vertex buffer (or
+recreate any resource), it needs to be <i>Disposed</i>, which is a way to
+force the release of the resources.
+</p>
+
+<p>
+Since the app won't read from these vertices, we pass in
+<i>WriteOnly</i>. There are various other flags that we could pass
+here to specify how our vertex array would be used, but we can go
+ahead and trust DirectX to do the right thing for now.
+</p>
+
+<p>
+Next we specify the vertex format that we are using. We already defined our
+vertex format as the type of <i>m_aVertices</i>, so we use that type. Later,
+when we do our own matrix transformations, this will change to reflect
+the type of <i>m_aVertices</i>. However, we don't have to define any special
+flags here since we are using a predetermined vertex format.
+
+</p>
+
+<p>
+The last parameter represents the type of memory management we
+require. We can trust DirectX again, and pass <i>Direct3D.Pool.Default</i>,
+which tells DirectX to use its default memory locations.
+</p>
+
+<p>
+In <i>InitDirect3D</i>, an event handler is set up to call our <i>OnDeviceReset</i>
+method. After that, we'll call the method ourselves to set the initial state of the device.
+</p>
+
+<pre>    device.DeviceReset += new System.EventHandler(this.OnDeviceReset);
+
+    OnDeviceReset(device, null);
+</pre>
+
+<p>
+Notice that we used += instead of = when assigning the event handler. The reason is that
+many listeners can be added to an event, and if we used = then only our event handler would
+be called. This is a well-behaved demo, so we will just add ourselves to the chain.
+</p>
+
+<p>Our vertex buffer is useless without filling it with meaningful data:</p>
+
+<pre>    vertexBuffer.SetData(m_aVertices, 0, Direct3D.LockFlags.None);
+</pre>
+
+<p>
+In DirectX 8 we had to lock the vertex buffer and copy all of the data, usually element
+by element, into the vertex buffer. In Managed DirectX it is one line! We send it the
+vertex array to use, the start index, and no flags. For dynamic vertex buffers we may
+want to use <i>Direct3D.LockFlags.Discard</i>.
+</p>
+
+<p>
+A trio of calls will tell Direct3D about our vertex format and set our
+vertex array as our active vertex array (we can have multiple vertex
+arrays).
+</p>
+
+<pre>    dev.VertexShader = null;
+    dev.VertexFormat = Direct3D.CustomVertex.TransformedColored.Format;
+    dev.SetStreamSource(0, vertexBuffer, 0);
+
+</pre>
+
+<p>
+We're not using a vertex shader yet, so that should be nulled out. The
+vertex format is the same format that was specified in the <i>VertexBuffer</i>
+constructor. Since these are the same, you should use a macro or some
+other method to ensure that when one changes the other is changed.
+</p>
+
+<p>
+SetStreamSource tells DirectX to use <i>vertexBuffer</i> as the active vertex array,
+and gives the offset into the array on where to start.
+</p>
+
+<p>
+The last thing we need to do is to turn off lighting so DirectX will use our vertex
+colors for the lighting:
+</p>
+
+<pre>    dev.RenderState.Lighting = false;
+</pre>
+
+<p>
+That was easy. You can now add the code to draw a triangle. In
+between the <i>BeginScene</i> and <i>EndScene</i> calls in the <i>DrawScene</i> method,
+insert this:
+
+</p>
+
+<pre>    device.DrawPrimitives(Direct3D.PrimitiveType.TriangleList,
+                          0,
+                          m_aVertices.Length / 3);
+</pre>
+
+<p>
+<i>TriangleList</i> will command DirectX to draw discrete triangles,
+with each vertex specified individually. We start at index zero, and
+specify the number of triangles to draw as the last parameter.
+</p>
+
+<p>
+If everything has been done correctly, we should have a triangle drawn on your previous blue background.
+
+</p>
+
+<p>
+<b>Indexed Triangles (3_IndexBufferDemo.cs)</b>
+</p>
+
+<p>
+In the above code, we told DirectX to draw straight from the vertex
+array. The main issues with this are size and, indirectly, speed. Take
+a cube for example. A cube has eight vertices. Using the above code,
+we would need to draw 12 triangles, each with three vertices, for a
+total of 36 vertices in our vertex array. This is more than four times
+the number of vertices in the cube itself!
+</p>
+
+<p>
+It would be better if we could just list each vertex once and index
+into this array. This way, we only have to transform eight vertices
+instead of 36. As it turns out, we can do this.
+</p>
+
+<p>First we set up an index buffer. This is the list of indices into the vertex array.</p>
+
+<pre>    dev.Indices = new Direct3D.IndexBuffer(m_aIndices[0].GetType(),
+                                           m_aIndices.Length,
+                                           dev,
+                                           Direct3D.Usage.WriteOnly,
+                                           Direct3D.Pool.Default);
+</pre>
+
+<p>The variable <i>m_aIndices</i> is defined as:</p>
+
+<pre>    private static ushort[] m_aIndices = { 0, 1, 2 };
+</pre>
+
+<p>
+The IndexBuffer constructor is similar to the VertexBuffer constructor above.
+First we pass the type and size of the buffer in bytes. Other flags are the
+same as before; <i>WriteOnly</i> because we only write to the
+buffer, <i>Direct3D.Pool.Default</i> to use the default memory configuration.
+The type is passed so DirectX knows the size of each index, which is 16 bits.
+The alternative is to use a 32-bit buffer (a C# <i>uint</i>), but besides being
+far larger than we need, it also doubles our bus traffic.
+</p>
+
+<p>
+Keep in mind that this buffer will also need to be <i>Disposed</i> when
+we lose it.
+
+</p>
+
+<p>Next we fill in this buffer, just as we did with the vertex buffers:</p>
+
+<pre>    dev.Indices.SetData(m_aIndices, 0, Direct3D.LockFlags.None);
+</pre>
+
+<p>
+We simply send our index list to the index buffer and it will take
+care of locking and unlocking just like the vertex buffer.
+</p>
+
+<p>
+
+In the <i>DrawScene</i> method, we can get rid of the <i>DrawPrimitives</i>
+method in exchange for a <i>DrawIndexedPrimitives</i> method:
+</p>
+
+<pre>    device.DrawIndexedPrimitives(Direct3D.PrimitiveType.TriangleList,
+                                 0,
+                                 0,
+                                 m_aVertices.Length,
+                                 0,
+                                 m_aIndices.Length / 3);
+</pre>
+
+<img src="./index.png" width="200" height="205" alt="Index Buffer Demo" class="right">
+
+<p>
+We are still drawing a triangle list as before. We pass the offset
+into the index buffer, the minimum vertex index used (zero in this case),
+the number of vertices used (three), the index number to start on (zero),
+and the number of triangles to render (one).
+</p>
+
+<p>
+If all goes well, this program should produce the exact same output
+as the last one. It's a bit more work, but it is also more scalable.
+</p>
+
+<p>
+<b>
+Adding Texture (4_TextureDemo.cs)
+</b>
+</p>
+
+<p>
+Texturing is just one of those things that adds so much visual bang
+for the buck, that is would be ludicrous not to add it. Luckily for us,
+doing this in Managed DirectX is painless.
+</p>
+
+<p>
+First we need texture coordinates in our vertex format structure.
+We'll change it to <i>Direct3D.CustomVertex.TransformedColoredTextured</i>
+which from the name should be obvious that it adds texture coordinates.
+Then we add the appropriate values to our <i>m_aVertices</i> array. This
+type change needs to be reflected in the vertex buffer constructor and
+the <i>VertexFormat</i> property on the device.
+</p>
+
+<p>DirectX will now draw the texture, but you have to tell it what texture to draw. In our
+<i>InitDirect3D</i> method, we add:</p>
+
+<br>
+
+<pre>    System.Reflection.Assembly assembly;
+    assembly = System.Reflection.Assembly.GetExecutingAssembly();
+    System.IO.Stream stream;
+    stream = assembly.GetManifestResourceStream("_4_Texture.photo.png");
+
+    Direct3D.Texture texture;
+    texture = Direct3D.TextureLoader.FromStream(dev, stream);
+    stream.Close();
+
+    dev.SetTexture(0, texture);
+</pre>
+
+<img src="./texture.png" width="200" height="205" alt="Texture Demo" class="right">
+
+<p>
+This code is less difficult than it looks. In previous versions of this article I would use D3DX to
+load a texture from a file, but its a bit more robust to read from resource embedded into
+the executable, in case the file does not exist. The first pair of lines opens up a stream
+that reads from our embedded texture. If we wanted to read from more than one stream
+(if we had more than one texture), we could use <i>assembly.GetManifestResourceNames</i>
+to get a list of the embedded resources.
+</p>
+
+<p>
+Next, we read from the stream into a texture object, and finally set texture 0 to
+use the texture we just loaded. We can have several stages of textures, but for
+now, we will just use the one. We could also set the <i>TextureState</i> property on
+the device to add different features like blending and bump mapping, but we will just
+use the default values for now.
+</p>
+
+<p>Now we have a texture-mapped triangle.</p>
+
+<p><b>Using Matrices and Extra Texture Coordinates (5_CubeDemo.cs)</b></p>
+
+<p>
+It is time to build our cube.  Now that we are entering the 3<sup>rd</sup>
+dimension (the previous examples were on a single plane), we have to
+enable our z-buffer. We also have to set up some matrices for model,
+world, and projection transformations.
+</p>
+
+<p>
+Enabling the z-buffer is fairly easy. When we create a device,
+we must add some extra fields to our <i>presentParams</i> structure:
+</p>
+
+<!-- Mozilla renders this wrong if images have stylesheets -->
+<table>
+<tbody><tr>
+<td>
+<pre>    presentParams.EnableAutoDepthStencil = true;
+    presentParams.AutoDepthStencilFormat = Direct3D.DepthFormat.D16;
+</pre>
+</td>
+</tr>
+</tbody></table>
+
+<p>This tells DirectX to use a 16-bit z-buffer. While this enables z-buffering,
+we can force z-buffering on if we turn it off at some point:</p>
+
+<pre>    dev.RenderState.ZBufferEnable = true;
+</pre>
+
+<p>
+Lastly, in our <i>DrawScene</i> method, we
+must modify the <i>Clear</i> method to clear the z-buffer in addition to the
+back buffer:
+</p>
+
+<pre>    device.Clear(Direct3D.ClearFlags.Target | Direct3D.ClearFlags.ZBuffer,
+                 System.Drawing.Color.CornflowerBlue,
+                 1.0f,
+                 0);
+</pre>
+
+<p>
+We add the flag <i>Direct3D.ClearFlags.ZBuffer</i> to enable z-buffer clearing, and
+we pass 1.0 as the fill value for the z-buffer. Now all of the
+polygons will be drawn correctly.
+</p>
+
+<p>
+Since we will be doing some transformations to our vertices, we
+can once again change our m_aVertices structure to remove the
+extra rhw parameter (used for pre-transformed vertices). So our
+<i>m_aVertices</i> type becomes <i>PositionColoredTextured</i>.
+We'll also have to change the constructor calls in the array and
+change all of the vertex format references to this type.
+</p>
+
+<p>
+DirectX has several types of matrices available, but we will use
+only three: World, View, and Projection. The World transformation will
+move the cube into world coordinates. The View transformations will
+move the world into view space. The Projection matrix will scale the
+world to make it look as if it has depth.
+</p>
+
+<p>
+Now we add a call to a new method, <i>BuildMatrices</i>, to our <i>DrawScene</i>
+method. <i>BuildMatrices</i> will build and activate your three matrices as
+described above. After each matrix is built, it is set on the device.
+</p>
+
+<p>As an example, we will build a no-op matrix:</p>
+
+<pre>    device.Transform.World = Matrix.Identity;
+</pre>
+
+<p>
+As you can see, this sets the world transformation matrix to an
+identity matrix. No structures need to be filled, and no methods
+need to be called.
+</p>
+
+<p>
+In the example program, our model coordinates are already
+transformed to world coordinates, so we could just leave this code as
+is. However, this needs a bit of flavor. In our code, we start our
+BuildMatrices function with:
+</p>
+
+<pre>    Microsoft.DirectX.Matrix matWorld;
+    matWorld = Matrix.RotationY(System.Environment.TickCount / 500.0f);
+    device.Transform.World = matWorld;
+</pre>
+
+<p>
+This setup will rotate the cube about the Y-axis. The parameter
+TickCount / 500.0f is the angle in radians based on the system clock.
+Doing this will give a smooth constant rotation.
+</p>
+
+<p>Now we'll build the other two matrices:</p>
+
+<pre>    Microsoft.DirectX.Vector3 cameraPosition = new Vector3(0.0f, 1.2f, -2.0f);
+    Microsoft.DirectX.Vector3 cameraTarget   = new Vector3(0.0f, 0.0f, 0.0f);
+    Microsoft.DirectX.Vector3 cameraUpVector = new Vector3(0.0f, 1.0f, 0.0f);
+    device.Transform.View = Matrix.LookAtLH(cameraPosition,
+                                            cameraTarget,
+                                            cameraUpVector);
+
+    device.Transform.Projection = Matrix.PerspectiveFovLH((float)System.Math.PI / 4,
+                                                          4.0f / 3.0f,
+                                                          1.0f,
+                                                          100.0f);
+</pre>
+
+<img src="./cube.png" width="200" height="205" alt="Cube Demo" class="right">
+
+<p>
+<i>Matrix.LookAtLH</i> builds a left-handed view matrix (some textbooks
+call this the camera). We pass three vectors: the position of the
+camera, the point we are looking at, and a vector that points up. This
+matrix is passed to DirectX as the view matrix.
+</p>
+
+<p>
+<i>Matrix.PerspectiveFovLH</i> builds a left-handed projection matrix
+that uses a variable field of view. <i>Math.PI</i> / 4 is the field of view in
+radians, which is 45 degrees. Then the aspect ratio is passed (most
+monitors are 4:3), as are the values representing the near and far clip planes.
+Lastly, we tell DirectX to use this as our projection matrix.
+
+</p>
+
+<p>
+After adding the rest of the vertices to our vertex array, we are ready to go.
+The result should be a spinning textured cube.
+</p>
+
+<p>
+Note, we are not reusing the vertices as described in example
+three. This is because we would need up to three texture coordinates per
+vertex and we only have specified the one.
+</p>
+
+<p>
+<b>
+Converting to Assembly Shaders (6_ShaderAsmDemo.cs)
+</b>
+</p>
+
+<p>
+
+One of the most important additions to DirectX 8 was the programmable
+pipeline. In DirectX 9, this pipeline is even more flexible, allowing
+a greater range of effects.
+</p>
+
+<p>
+In the previous examples, we would let DirectX manage the transformation
+and lighting in what is known as the fixed-function pipeline. Now we will
+replace the fixed function pipeline with a shader to allow for future
+programmability. We won't make any changes to the functionality; the shader
+will simply mimic the behaviour of the fixed function pipeline.
+</p>
+
+<p>
+The first step is to create shader flags. For the most part we don't have
+to do anything special here. The flags are mostly to specify parameters
+for compiling or assembling the shader. We'll set a debug flag for when
+we are in debug mode, so we can use a shader debugger if we wanted.
+</p>
+
+<pre>    Direct3D.ShaderFlags shaderFlags = Direct3D.ShaderFlags.None;
+    #if (DEBUG)
+    shaderFlags |= Direct3D.ShaderFlags.Debug;
+    #endif
+</pre>
+
+<p>
+The next step is to actually create our vertex shader.
+</p>
+
+<pre>    Direct3D.GraphicsStream gs;
+    stream = assembly.GetManifestResourceStream("_6_ShaderAsm.VertexShader.vsh");
+    gs = Direct3D.ShaderLoader.FromStream(stream, null, shaderFlags);
+    vertexShader = new Direct3D.VertexShader(device, gs);
+    gs.Close();
+    stream.Close();
+</pre>
+
+<p>
+This is very similar to what we used when we created the texture. A stream is
+opened to an embedded resource and that stream is sent to DirectX to assemble
+our shader. Finally a new <i>VertexShader</i> object is created from the
+assembled code.
+
+</p>
+
+<p>
+There are some subtle things to note here. Notice that the two streams are closed
+when we are done using them. Even though C# is a garbage collected language, there
+are times where we want to release an objects resources even though the object
+still exists.
+</p>
+
+<p>
+Another thing that isn't shown in the code here, is that this code actually resides
+in the <i>InitDirect3D</i> method instead of the <i>OnDeviceReset</i> method. In
+DirectX 9, shader objects do not need to be recreated on a device reset, so we can
+create them once and hold on to them.
+</p>
+
+<p>
+
+The vertex shader needs to be paired with an appropriate pixel shader. The pixel
+shader is set in the same way.
+</p>
+
+<pre>    stream = assembly.GetManifestResourceStream("_6_ShaderAsm.PixelShader.psh");
+    gs = Direct3D.ShaderLoader.FromStream(stream, null, shaderFlags);
+    pixelShader = new Direct3D.PixelShader(device, gs);
+    gs.Close();
+    stream.Close();
+</pre>
+
+<p>
+Now would be a good time to take a look at the vertex and pixel shaders themselves.
+The vertex shader is straightforward and doesn't use any DirectX 9 specific
+functionality. All it does is multiply the transformation matrix against the
+incoming vertex position. It then sends the new position and the raw vertex
+color and texture coordinates to the pixel shader.
+</p>
+
+<pre>    vs.1.1
+    dcl_position v0
+    dcl_color    v1
+    dcl_texcoord v2
+
+    m4x4 oPos, v0, c0              ; Transform the vertex into screen-space
+
+    mov oD0, v1                    ; Save the diffuse color
+    mov oT0.xy, v2                 ; Save texture coords
+</pre>
+
+<p>
+In DirectX 9, it is now required to declare all of the used vertex registers with
+the type that they represent. This is so that the proper registers can be matched
+against our <i>VertexElement</i> structure which we will create in a moment. As you
+can see, the position, color, and texture coordinate are passed, which matches
+our <i>PositionColoredTextured</i> vertex type.
+</p>
+
+<pre>    ps.1.1
+    tex t0              ; Sample texture
+    mul r0, t0, v0      ; Multiply texture color with interpolated diffuse color
+</pre>
+
+<p>
+The pixel shader is even simpler. The texture color is sampled from the texture
+and the resulting color is multiplied against the diffuse color from the vertex
+shader. The result in the <i>r0</i> register is the final color of the pixel.
+</p>
+
+<p>
+Now we have a pair of shaders, we need to send our program data to the shaders.
+</p>
+
+<pre>    Direct3D.VertexElement[] decl;
+    decl = new Direct3D.VertexElement[]
+    {
+        new Direct3D.VertexElement(0,
+                                   0,
+                                   Direct3D.DeclarationType.Float3,
+                                   Direct3D.DeclarationMethod.Default,
+                                   Direct3D.DeclarationUsage.Position,
+                                   0),
+        new Direct3D.VertexElement(0,
+                                   12,
+                                   Direct3D.DeclarationType.Color,
+                                   Direct3D.DeclarationMethod.Default,
+                                   Direct3D.DeclarationUsage.Color,
+                                   0),
+        new Direct3D.VertexElement(0,
+                                   16,
+                                   Direct3D.DeclarationType.Float2,
+                                   Direct3D.DeclarationMethod.Default,
+                                   Direct3D.DeclarationUsage.TextureCoordinate,
+                                   0),
+        Direct3D.VertexElement.VertexDeclarationEnd
+    };
+    device.VertexDeclaration = new Direct3D.VertexDeclaration(device, decl);
+</pre>
+
+<p>
+This array describes each of our three vertex elements, position, color, and texture
+coordinate. This is needed so that DirectX can copy our data from the <i>m_aVertices</i>
+array to the correct registers in the vertex shader.
+</p>
+
+<p>
+First we tell which vertex stream we are reading from. We pass zero since we only
+use one vertex stream. Next is the offset into the vertex where the data starts. This
+equals the offset of the previous element, plus the size of the previous element. We start
+at zero. Next we pass the type of data. Position is a triple of floats, color is four
+bytes, and our texture coordinates are a pair of floats. The DeclarationMethod is
+generally used with bump or displacement mapping, so we'll just use the default behaviour.
+Next we tell DirectX the type of data the element represents. The last parameter is called
+the usage index, and we can just set that to zero.
+</p>
+
+<p>
+The final element in the array is <i>VertexDeclarationEnd</i>. This is a predefined
+element that tells DirectX that this is the end of the array.
+
+</p>
+
+<p>
+We have described most of the inputs to the vertex shader, but we have not told the
+shader what the transformation matrix is. Instead of setting the transformation
+matrices in <i>BuildMatrices</i>, we will combine the matrices ourselves and
+send it to the shader.
+</p>
+
+<pre>    Matrix mat = Matrix.Multiply(matWorld, matView);
+    mat = Matrix.Multiply(mat, matProj);
+
+    // The assembly vertex shader does not use the Direct3D matrix format for
+    // its matrix instructions (m4x4) so the matrix must be transposed to work.
+    mat.Transpose(mat);
+    device.SetVertexShaderConstant(0, mat);
+</pre>
+
+<p>
+As you can see, we took the world, view, and projection matrices and multiplied
+them together. This matrix is set as the first vertex shader constant register
+(actually its set as the first 4 registers, since a matrix is 4 vectors wide).
+
+</p>
+
+<p>
+The trick here is that the matrix is transposed before it is set. This is because
+the vertex shader uses the m4x4 instruction, which expects a transposed matrix.
+You can check the included vertex shader sample code, which shows how to fix
+this problem.
+</p>
+
+<p>
+Lastly, we can set the vertex and pixel shaders on the device in <i>OnResetDevice</i>
+and our cube will spin once more! One thing the sample does, which I did not show
+here is that it checks the supported vertex and pixel shader version numbers. If
+the card does not support the correct numbers, it will switch to use the reference
+rasterizer.
+</p>
+
+<p><b>Shaders in the High Level Shader Language (7_ShaderHLSLDemo.cs)</b></p>
+
+<p>
+
+Once our shaders become non-trivial, it is welcome to use a higher-level language
+than assembly to program in. DirectX 9 introduces HLSL, which is nearly identical
+to nVidia's <a href="http://developer.nvidia.com/page/cg_main.html">Cg</a>. We'll convert the previous example to use HLSL instead of assembly.
+</p>
+
+<p>
+To compare what the difference between assembly and HLSL, this is the single
+HLSL shader program that we are going to use.
+</p>
+
+<pre>    struct VS_INPUT
+    {
+        float3 position : POSITION0;
+        float4 color    : COLOR0;
+        float2 texture0 : TEXCOORD0;
+    };
+
+    struct PS_INPUT
+    {
+        float4 position  : POSITION;
+        float4 color     : COLOR0;
+        float2 texture0  : TEXCOORD0;
+    };
+
+    // Vertex shader
+    PS_INPUT VertexShader(
+        VS_INPUT vertex,
+        uniform float4x4 matWorldViewProj)
+    {
+        PS_INPUT vsOut;
+
+        vsOut.position = mul(matWorldViewProj, float4(vertex.position, 1));
+        vsOut.color    = vertex.color;
+        vsOut.texture0 = vertex.texture0;
+
+        return vsOut;
+    }
+
+    // Pixel shader
+    float4 PixelShader(PS_INPUT pixel, uniform sampler2D diffuse) : COLOR
+    {
+        return tex2D(diffuse, pixel.texture0) * pixel.color;
+    }
+</pre>
+
+<p>
+
+It is slightly longer than our previous assembly shaders, but this is because it is
+a very simple shader. When we turn to more complex shaders, the advantage is clearer.
+However, you can see that this code is more structured, and provides a degree
+of type safety that we didn't have before.
+</p>
+
+<p>
+The first function is our vertex shader, and it takes a <i>VS_INPUT</i> structure
+and our transformation matrix as inputs. It outputs a <i>PS_INPUT</i> structure that
+the pixel shader uses as an input. This function does the same as our assembly shader,
+and transforms our vertex by our transformation matrix and leaves the
+color and texture coordinates as is. Note how the <i>VS_INPUT</i> structure
+matches the definition of our vertex element array.
+</p>
+
+<p>
+
+The pixel shader takes the <i>PS_INPUT</i> structure and a reference to a texture
+as inputs. All it does is multiply the texture color against the color in <i>PS_INPUT</i>.
+</p>
+
+<p>
+The only real change that needs to be made to program is to create the vertex and
+pixel shaders from this code instead of the assembly code.
+</p>
+
+<pre>    // Both of the Vertex and Pixel Shaders reside in one HLSL file
+    System.IO.Stream stream;
+    stream = assembly.GetManifestResourceStream("_7_ShaderHLSL.Shader.fx");
+
+    Direct3D.GraphicsStream gs;
+    gs = Direct3D.ShaderLoader.CompileShaderFromStream(stream,
+                                                       "VertexShader",
+                                                       null,
+                                                       "vs_1_1",
+                                                       (int)shaderFlags);
+    vertexShader = new Direct3D.VertexShader(device, gs);
+    gs.Close();
+
+    stream.Seek(0, System.IO.SeekOrigin.Begin);
+
+    gs = Direct3D.ShaderLoader.CompileShaderFromStream(stream,
+                                                       "PixelShader",
+                                                       null,
+                                                       "ps_1_1",
+                                                       (int)shaderFlags);
+    pixelShader = new Direct3D.PixelShader(device, gs);
+    gs.Close();
+
+    stream.Close();
+</pre>
+
+<p>
+Since both shaders reside in one file, we can keep our stream to the embedded
+resource open and just reset it when we want to compile a new shader. The difference
+is that we now call <i>CompileShaderFromStream</i>, which accepts a HLSL shader. In each
+case we pass the stream to read from and shader flags as in the assembly case. We also
+pass the function for the shader and the type of shader profile
+</p>
+
+<p>
+The last thing we need to do is to undo the matrix transpose that we did in
+<i>BuildMatrices</i>. HLSL knows the DirectX matrix format, and know it needs
+to treat it differently. Now our cube is now spinning using a HLSL shader.
+</p>
+
+<p>
+<b>Wrapping Up</b>
+
+</p>
+
+<p>
+This is just a small glimpse of what you can do with Managed DirectX. Managed DirectX
+opens up a number of possibilities for rapid development of media software. While
+the documentation is not great, I hope this article helps shed some light on questions
+you may have had on how to implement graphics code in Managed DirectX.
+</p>
+
+<p>
+<b>Running without Visual Studio</b>
+</p>
+
+<p>
+These samples were developed under Visual Studio .NET 2003, but they only require
+a C# compiler and the DirectX 9 SDK. The
+<a href="http://www.microsoft.com/downloads/details.aspx?FamilyId=9B3A2CA6-3647-4070-9F41-A333C6B9181D&displaylang=en">.NET Framework SDK</a>
+comes with a command line C# compiler which can be used with the DirectX SDK.
+</p>
+
+<p>
+To compile the examples, you would need to do something like:
+</p>
+
+<pre>    csc /lib:c:\winnt\microsoft.net\manage~1\v9.00.1126
+        /reference:Microsoft.DirectX.dll
+        /reference:Microsoft.DirectX.Direct3D.dll
+        /t:winexe BasicDemo.cs
+</pre>
+
+<p>
+You may need to change the path to your copy of the Managed DirectX assemblies. You
+might also need to add references to additional assemblies depending on which sample
+you are compiling.
+</p>
+
+<p>
+
+To run these apps on a non-development machine, you will need to install the
+<a href="">.NET Framework 1.1</a>
+and <a href="">DirectX 9</a>.
+Note that when you install DirectX, you must use the <b>/installmanageddx</b> switch,
+or Managed DirectX will not be installed. You cannot use Windows Update to install
+Managed DirectX.
+</p>
+
+<p><b>About the Author</b></p>
+
+<p>
+Thobias Jones is the founder and Chief Software Architect of Genkisoft and
+was the primary author of <a href="http://www.turbohex.com/turbohex.shtml">Genkisoft TurboHex</a>,
+our flagship hex editor. Thobias has a wide range of experience in 3D graphics
+and systems programming.
+</p>
+
+<p>
+<i>
+Want to discuss this article or Managed DirectX? Check out our <a href="">forums</a>!
+</i>
+</p>
+
+</td></tr>
+</tbody></table>
+</td>
+</tr>
+
+<tr>
+<td class="blue">
+&nbsp;
+</td>
+<td>
+<table class="tabs" border="0" cellpadding="2" cellspacing="0" frame="vsides">
+ <tbody><tr>
+ <td class="content"><br></td>
+ </tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+
+<table width="800">
+<tbody><tr><td>
+<address>
+Copyright © 2003-2011 Toby Jones. All rights reserved.
+</address>
+
+</td></tr>
+</tbody></table>
+
+
+</body></html>
