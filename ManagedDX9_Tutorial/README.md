@@ -1,5 +1,5 @@
-This is the code that I used as the basis for my article \"DirectX 9 Graphics\:
-Improving On A Good Thing\" which I published in 2003. The article is included
+This is the code that I used as the basis for my article "DirectX 9 Graphics\:
+Improving On A Good Thing" which I published in 2003. The article is included
 in the _article_ folder.
 
 This code was compiled with Visual C# 2003, however it depends on assemblies

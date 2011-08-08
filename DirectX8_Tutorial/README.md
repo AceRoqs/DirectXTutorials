@@ -1,5 +1,5 @@
-This is the code that I used as the basis for my article \"DirectX 8 Graphics
-and Video\: A Fresh Start\" which was published in November 2000 on
+This is the code that I used as the basis for my article "DirectX 8 Graphics
+and Video\: A Fresh Start" which was published in November 2000 on
 [gamedev.net](http://www.gamedev.net/page/resources/_/reference/programming/directx/directx-graphics/directx-8-graphics-and-video-a-fresh-start-r1247)
 
 The article and code was the first public tutorial for DirectX 8, being
