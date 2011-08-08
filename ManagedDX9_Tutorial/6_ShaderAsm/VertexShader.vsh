@@ -1,8 +1,21 @@
 vs.1.1
+
+; Copyright (C) 2003 by Toby Jones.
+
+; Licensed under the Apache License, Version 2.0 (the "License");
+; you may not use this file except in compliance with the License.
+; You may obtain a copy of the License at
+
+;  http://www.apache.org/licenses/LICENSE-2.0
+
+; Unless required by applicable law or agreed to in writing, software
+; distributed under the License is distributed on an "AS IS" BASIS,
+; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+; See the License for the specific language governing permissions and
+; limitations under the License.
+
 ;=========================================================================
 ; VertexShader.psh
-; Coder: Thobias Jones
-; Copyright (c) 2003 Thobias Jones. All rights reserved.
 ; Purpose: Simple assembly vertex shader
 ;=========================================================================
 
@@ -40,3 +53,4 @@ m4x4 oPos, v0, c0              ; Transform the vertex into screen-space
 
 mov oD0, v1                    ; Save the diffuse color
 mov oT0.xy, v2                 ; Save texture coords
+
