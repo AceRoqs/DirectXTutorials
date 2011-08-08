@@ -1,7 +1,7 @@
 This is the reference code that I used as the basis of comparison when I
 first wrote DirectX 9 Managed code. These demos should be comparable to
 the corresponding demos in the
-(ManagedDX9_Tutorial)[https://github.com/AceRoqs/directx_tutorials/tree/master/ManagedDX9_Tutorial]
+[ManagedDX9_Tutorial](https://github.com/AceRoqs/directx_tutorials/tree/master/ManagedDX9_Tutorial)
 series, though I never published the C++ version previously.
 
 This code was compiled with Visual C++ 2010, though porting it to
