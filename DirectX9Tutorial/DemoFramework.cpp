@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2003-2011 by Toby Jones.
+Copyright (C) 2003-2014 by Toby Jones.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,8 +16,6 @@ limitations under the License.
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-
-#pragma warning(disable:4127)  // Conditional expression is constant.
 
 // This is a framework for the DirectX demos.  Demo modules must implement
 // the following functions:
@@ -89,7 +87,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, HINSTANCE, LPSTR, int iCmdShow)
     ::ShowWindow(hwnd, iCmdShow);
     ::UpdateWindow(hwnd);
 
-    while(true)
+    for(;;)
     {
         // Clear out all the messages before we draw a new frame.
         MSG msg;

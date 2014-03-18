@@ -6,7 +6,7 @@ series, though I never published the C++ version previously.
 
 This code was compiled with Visual C++ 2010, though porting it to
 previous versions of Visual C++ should be trivial as the code was
-originally developed on Visual C++ 2003 and no C++0x features are used.
+originally developed on Visual C++ 2003 and no C++11 features are used.
 
 This code was derived from my DirectX 8 tutorial code written over a
 decade ago, so my current coding practices differ a bit from what is

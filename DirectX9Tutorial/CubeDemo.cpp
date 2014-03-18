@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2003-2011 by Toby Jones.
+Copyright (C) 2003-2014 by Toby Jones.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -31,16 +31,11 @@ void HELPER_RELEASE(_In_opt_ Ty ** pointer)
 const PCTSTR FILENAME = TEXT("photo.png");
 
 // In general, these will not be global, and should be wrapped in a smart pointer.
-IDirect3D9 * pID3D                     = nullptr;
-IDirect3DDevice9 * pID3DDevice         = nullptr;
-IDirect3DVertexBuffer9 * pStreamData   = nullptr;
-IDirect3DIndexBuffer9 * pIndexBuffer   = nullptr;
-IDirect3DTexture9 * pTexture           = nullptr;
-LPD3DXBUFFER pBuffer                   = nullptr;
-LPD3DXBUFFER pErrorBuffer              = nullptr;
-IDirect3DVertexShader9 * pVertexShader = nullptr;
-IDirect3DPixelShader9 * pPixelShader   = nullptr;
-IDirect3DVertexDeclaration9 * pDecl    = nullptr;
+static IDirect3D9 * pID3D                   = nullptr;
+static IDirect3DDevice9 * pID3DDevice       = nullptr;
+static IDirect3DVertexBuffer9 * pStreamData = nullptr;
+static IDirect3DIndexBuffer9 * pIndexBuffer = nullptr;
+static IDirect3DTexture9 * pTexture         = nullptr;
 
 struct MYVERTEX
 {
@@ -48,60 +43,6 @@ struct MYVERTEX
     DWORD color;   // The vertex color
     FLOAT tu, tv;  // Texture coordinates
 };
-
-static const char szVertexShader[] =
-"vs.2.0\n"
-"dcl_position v0\n"
-"dcl_color    v5\n"
-"dcl_texcoord v7\n"
-"dp4 oPos.x, v0, c0\n"
-"dp4 oPos.y, v0, c1\n"
-"dp4 oPos.z, v0, c2\n"
-"dp4 oPos.w, v0, c3\n"
-"mov oD0, v5\n"
-"mov oT0, v7\n";
-
-static const char szPixelShader[] =
-"ps.1.1\n"
-"tex t0\n"
-"mul r0, v0, t0\n";
-
-static const D3DVERTEXELEMENT9 aVertexElement[] =
-{
-    0,                      // Stream
-    0,                      // Offset
-    D3DDECLTYPE_FLOAT3,     // Type
-    D3DDECLMETHOD_DEFAULT,  // Method
-    D3DDECLUSAGE_POSITION,  // Usage
-    0,                      // UsageIndex
-
-    0,                      // Stream
-    12,                     // Offset
-    D3DDECLTYPE_D3DCOLOR,   // Type
-    D3DDECLMETHOD_DEFAULT,  // Method
-    D3DDECLUSAGE_COLOR,     // Usage
-    0,                      // UsageIndex
-
-    0,                      // Stream
-    16,                     // Offset
-    D3DDECLTYPE_FLOAT2,     // Type
-    D3DDECLMETHOD_DEFAULT,  // Method
-    D3DDECLUSAGE_TEXCOORD,  // Usage
-    0,                      // UsageIndex
-
-    D3DDECL_END()
-};
-
-/*
-DWORD dwDecl[] =
-{
-    D3DVSD_STREAM(0),
-    D3DVSD_REG(D3DVSDE_POSITION,  D3DVSDT_FLOAT3),
-    D3DVSD_REG(D3DVSDE_DIFFUSE,  D3DVSDT_D3DCOLOR),
-    D3DVSD_REG(D3DVSDE_TEXCOORD0,  D3DVSDT_FLOAT2),
-    D3DVSD_END()
-};
-*/
 
 static const MYVERTEX vertices[] =
 {
@@ -186,62 +127,6 @@ HRESULT InitDirect3D(_In_ HWND hwnd)
             break;
         }
 
-        hr = D3DXAssembleShader(szVertexShader, sizeof(szVertexShader) - 1, nullptr, nullptr, 0, &pBuffer, &pErrorBuffer);
-        if(FAILED(hr))
-        {
-            OutputDebugStringA(reinterpret_cast<char *>(pErrorBuffer->GetBufferPointer()));
-            break;
-        }
-
-        hr = pID3DDevice->CreateVertexShader(reinterpret_cast<DWORD *>(pBuffer->GetBufferPointer()), &pVertexShader);
-        if(FAILED(hr))
-        {
-            break;
-        }
-
-        HELPER_RELEASE(&pBuffer);
-        HELPER_RELEASE(&pErrorBuffer);
-        hr = D3DXAssembleShader(szPixelShader, sizeof(szPixelShader) - 1, nullptr, nullptr, 0, &pBuffer, &pErrorBuffer);
-        if(FAILED(hr))
-        {
-            OutputDebugStringA(reinterpret_cast<char *>(pErrorBuffer->GetBufferPointer()));
-            break;
-        }
-
-        hr = pID3DDevice->CreatePixelShader(reinterpret_cast<DWORD *>(pBuffer->GetBufferPointer()), &pPixelShader);
-        if(FAILED(hr))
-        {
-            break;
-        }
-
-        // Free unused resources.
-        HELPER_RELEASE(&pBuffer);
-        HELPER_RELEASE(&pErrorBuffer);
-
-        hr = pID3DDevice->CreateVertexDeclaration(aVertexElement, &pDecl);
-        if(FAILED(hr))
-        {
-            break;
-        }
-
-        hr = pID3DDevice->SetVertexShader(pVertexShader);
-        if(FAILED(hr))
-        {
-            break;
-        }
-
-        hr = pID3DDevice->SetPixelShader(pPixelShader);
-        if(FAILED(hr))
-        {
-            break;
-        }
-
-        hr = pID3DDevice->SetVertexDeclaration(pDecl);
-        if(FAILED(hr))
-        {
-            break;
-        }
-
         // we do our own coloring, so disable lighting
         hr = pID3DDevice->SetRenderState(D3DRS_LIGHTING,
                                          FALSE);
@@ -259,8 +144,7 @@ HRESULT InitDirect3D(_In_ HWND hwnd)
 
         // Setup our vertex buffer
         unsigned int num_elems = ARRAYSIZE(vertices);
-        hr = pID3DDevice->CreateVertexBuffer(sizeof(MYVERTEX) *
-                                             num_elems,
+        hr = pID3DDevice->CreateVertexBuffer(sizeof(MYVERTEX) * num_elems,
                                              D3DUSAGE_WRITEONLY,
                                              D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1,
                                              D3DPOOL_DEFAULT,
@@ -286,6 +170,13 @@ HRESULT InitDirect3D(_In_ HWND hwnd)
         }
 
         hr = pStreamData->Unlock();
+        if(FAILED(hr))
+        {
+            break;
+        }
+
+        // Set a common vertex shader
+        hr = pID3DDevice->SetFVF(D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1);
         if(FAILED(hr))
         {
             break;
@@ -342,9 +233,6 @@ HRESULT InitDirect3D(_In_ HWND hwnd)
 
 void ShutdownDirect3D()
 {
-    HELPER_RELEASE(&pDecl);
-    HELPER_RELEASE(&pPixelShader);
-    HELPER_RELEASE(&pVertexShader);
     HELPER_RELEASE(&pTexture);
     HELPER_RELEASE(&pIndexBuffer);
     HELPER_RELEASE(&pStreamData);
@@ -354,30 +242,20 @@ void ShutdownDirect3D()
 
 void BuildMatrices()
 {
-    D3DXMATRIX matrixRot;
-    D3DXMatrixRotationY(&matrixRot, timeGetTime() / 1000.0f);
-    pID3DDevice->SetTransform(D3DTS_WORLD, &matrixRot);
+    D3DXMATRIX matrix;
+    D3DXMatrixRotationY(&matrix, timeGetTime() / 1000.0f);
+    pID3DDevice->SetTransform(D3DTS_WORLD, &matrix);
 
     D3DXVECTOR3 camerapos(0.0f, 3.0f, -5.0f);
     D3DXVECTOR3 lookat(0.0f, 0.0f, 0.0f);
     D3DXVECTOR3 up(0.0f, 1.0f, 0.0f);
 
-    D3DXMATRIX matrixView;
-    D3DXMatrixLookAtLH(&matrixView, &camerapos, &lookat, &up);
-
-    pID3DDevice->SetTransform(D3DTS_VIEW, &matrixView);
+    D3DXMatrixLookAtLH(&matrix, &camerapos, &lookat, &up);
+    pID3DDevice->SetTransform(D3DTS_VIEW, &matrix);
 
     // Set our frustum to 45 degrees
-    D3DXMATRIX matrixPer;
-    D3DXMatrixPerspectiveFovLH(&matrixPer, D3DX_PI / 4, 4.0f / 3.0f, 1.0f, 100.0f);
-    pID3DDevice->SetTransform(D3DTS_PROJECTION, &matrixPer);
-
-    D3DXMATRIX mat;
-    D3DXMatrixMultiply(&mat, &matrixRot, &matrixView);
-    D3DXMatrixMultiply(&mat, &mat, &matrixPer);
-
-    D3DXMatrixTranspose(&mat, &mat);
-    pID3DDevice->SetVertexShaderConstantF(0, (float *)&mat, 4);
+    D3DXMatrixPerspectiveFovLH(&matrix, D3DX_PI / 4, 4.0f / 3.0f, 1.0f, 100.0f);
+    pID3DDevice->SetTransform(D3DTS_PROJECTION, &matrix);
 }
 
 HRESULT DrawScene()

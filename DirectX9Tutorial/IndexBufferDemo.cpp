@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2003-2011 by Toby Jones.
+Copyright (C) 2003-2014 by Toby Jones.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -34,6 +34,22 @@ static IDirect3DDevice9 * pID3DDevice       = nullptr;
 static IDirect3DVertexBuffer9 * pStreamData = nullptr;
 static IDirect3DIndexBuffer9 * pIndexBuffer = nullptr;
 static IDirect3DTexture9 * pTexture         = nullptr;
+
+struct MYVERTEX
+{
+    FLOAT x, y, z; // The transformed position
+    FLOAT rhw;     // 1.0 (reciprocal of homogeneous w)
+    DWORD color;   // The vertex color
+};
+
+static const MYVERTEX vertices[] =
+{
+    { 120.0f, 120.0f, 1.0f, 1.0f, D3DCOLOR_ARGB(255, 127, 127, 127) },
+    { 200.0f, 200.0f, 1.0f, 1.0f, D3DCOLOR_ARGB(255, 127, 127, 127) },
+    { 30.0f,  200.0f, 1.0f, 1.0f, D3DCOLOR_ARGB(255, 255, 255, 255) },
+};
+
+static const WORD indices[] = { 0, 1, 2 };
 
 HRESULT InitDirect3D(_In_ HWND hwnd)
 {
@@ -72,7 +88,87 @@ HRESULT InitDirect3D(_In_ HWND hwnd)
         // we do our own coloring, so disable lighting
         hr = pID3DDevice->SetRenderState(D3DRS_LIGHTING,
                                          FALSE);
+        if(FAILED(hr))
+        {
+            break;
+        }
 
+        // Setup our vertex buffer
+        unsigned int num_elems = ARRAYSIZE(vertices);
+        hr = pID3DDevice->CreateVertexBuffer(sizeof(MYVERTEX) * num_elems,
+                                             D3DUSAGE_WRITEONLY,
+                                             D3DFVF_XYZRHW | D3DFVF_DIFFUSE,
+                                             D3DPOOL_DEFAULT,
+                                             &pStreamData,
+                                             nullptr);
+        if(FAILED(hr))
+        {
+            break;
+        }
+
+        MYVERTEX *pVertex;
+        hr = pStreamData->Lock(0, 0, reinterpret_cast<void**>(&pVertex), 0);
+        if(FAILED(hr))
+        {
+            break;
+        }
+
+        // copy our vertices
+        unsigned int ii;
+        for(ii = 0; ii < num_elems; ++ii)
+        {
+            pVertex[ii] = vertices[ii];
+        }
+
+        hr = pStreamData->Unlock();
+        if(FAILED(hr))
+        {
+            break;
+        }
+
+        // Set a common vertex shader
+        hr = pID3DDevice->SetFVF(D3DFVF_XYZRHW | D3DFVF_DIFFUSE);
+        if(FAILED(hr))
+        {
+            break;
+        }
+
+        hr = pID3DDevice->SetStreamSource(0, pStreamData, 0, sizeof(MYVERTEX));
+        if(FAILED(hr))
+        {
+            break;
+        }
+
+        // Setup our index buffer
+        num_elems = ARRAYSIZE(indices);
+        hr = pID3DDevice->CreateIndexBuffer(sizeof(WORD) * num_elems, // in bytes, not indices
+                                            D3DUSAGE_WRITEONLY,
+                                            D3DFMT_INDEX16,
+                                            D3DPOOL_DEFAULT,
+                                            &pIndexBuffer,
+                                            nullptr);
+        WORD *pIndex;
+        hr = pIndexBuffer->Lock(0, 0, reinterpret_cast<void**>(&pIndex), 0);
+        if(FAILED(hr))
+        {
+            break;
+        }
+        for(ii = 0; ii < num_elems; ++ii)
+        {
+            pIndex[ii] = indices[ii];
+        }
+
+        hr = pIndexBuffer->Unlock();
+        if(FAILED(hr))
+        {
+            break;
+        }
+
+        hr = pID3DDevice->SetIndices(pIndexBuffer);
+        if(FAILED(hr))
+        {
+            break;
+        }
     } while(false);
 
     return hr;
@@ -111,7 +207,17 @@ HRESULT DrawScene()
             break;
         }
 
-        // Put all drawing code here
+        // draw our triangle
+        hr = pID3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST,
+                                               0,
+                                               0,
+                                               ARRAYSIZE(vertices),
+                                               0,
+                                               ARRAYSIZE(indices) / 3);
+        if(FAILED(hr))
+        {
+            break;
+        }
 
         hr = pID3DDevice->EndScene();
         if(FAILED(hr))
