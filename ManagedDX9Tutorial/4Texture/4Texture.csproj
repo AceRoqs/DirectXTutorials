@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{7F9D1436-251C-47CD-8FCD-0B152C972DA1}"
+        ProjectGuid = "{1C96DABF-C79E-4044-AAE0-4D46978AA764}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "1_Basic"
+                AssemblyName = "4Texture"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "WinExe"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "_1_Basic"
+                RootNamespace = "_4Texture"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -65,44 +65,54 @@
             </Settings>
             <References>
                 <Reference
-                    Name = "System"
-                    AssemblyName = "System"
-                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
                 />
                 <Reference
                     Name = "System.Windows.Forms"
                     AssemblyName = "System.Windows.Forms"
-                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Windows.Forms.dll"
+                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Windows.Forms.dll"
                 />
                 <Reference
                     Name = "Microsoft.DirectX"
                     AssemblyName = "Microsoft.DirectX"
-                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.dll"
+                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.dll"
                     AssemblyFolderKey = "hklm\current managed directx 9.1"
                 />
                 <Reference
                     Name = "Microsoft.DirectX.Direct3D"
                     AssemblyName = "Microsoft.DirectX.Direct3D"
-                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.Direct3D.dll"
+                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.Direct3D.dll"
                     AssemblyFolderKey = "hklm\current managed directx 9.1"
                 />
                 <Reference
-                    Name = "System.Drawing"
-                    AssemblyName = "System.Drawing"
-                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
+                    Name = "System"
+                    AssemblyName = "System"
+                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                />
+                <Reference
+                    Name = "Microsoft.DirectX.Direct3DX"
+                    AssemblyName = "Microsoft.DirectX.Direct3DX"
+                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.Direct3DX.dll"
+                    AssemblyFolderKey = "hklm\current managed directx 9.1"
                 />
             </References>
         </Build>
         <Files>
             <Include>
                 <File
-                    RelPath = "BasicDemo.cs"
+                    RelPath = "photo.png"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "TextureDemo.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "BasicDemo.resx"
-                    DependentUpon = "BasicDemo.cs"
+                    RelPath = "TextureDemo.resx"
+                    DependentUpon = "TextureDemo.cs"
                     BuildAction = "EmbeddedResource"
                 />
             </Include>

@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{CAEA9A04-882C-4515-A42A-97AFB22F8986}"
+        ProjectGuid = "{7F9D1436-251C-47CD-8FCD-0B152C972DA1}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "2_VertexBuffer"
+                AssemblyName = "1Basic"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "WinExe"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "_2_VertexBuffer"
+                RootNamespace = "_1Basic"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -65,9 +65,9 @@
             </Settings>
             <References>
                 <Reference
-                    Name = "System.Drawing"
-                    AssemblyName = "System.Drawing"
-                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
+                    Name = "System"
+                    AssemblyName = "System"
+                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"
                 />
                 <Reference
                     Name = "System.Windows.Forms"
@@ -87,22 +87,22 @@
                     AssemblyFolderKey = "hklm\current managed directx 9.1"
                 />
                 <Reference
-                    Name = "System"
-                    AssemblyName = "System"
-                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
                 />
             </References>
         </Build>
         <Files>
             <Include>
                 <File
-                    RelPath = "VertexBufferDemo.cs"
+                    RelPath = "BasicDemo.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "VertexBufferDemo.resx"
-                    DependentUpon = "VertexBufferDemo.cs"
+                    RelPath = "BasicDemo.resx"
+                    DependentUpon = "BasicDemo.cs"
                     BuildAction = "EmbeddedResource"
                 />
             </Include>

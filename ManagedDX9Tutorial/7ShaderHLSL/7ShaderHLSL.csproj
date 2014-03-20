@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{E1B13314-E3E5-4065-9F3E-1B2906D525D6}"
+        ProjectGuid = "{D229E0FA-3F38-4D26-86E7-C563EA3302FC}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "6_ShaderAsm"
+                AssemblyName = "7ShaderHLSL"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "WinExe"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "_6_ShaderAsm"
+                RootNamespace = "_7ShaderHLSL"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -106,21 +106,17 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "PixelShader.psh"
+                    RelPath = "Shader.fx"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "ShaderAsmDemo.cs"
+                    RelPath = "ShaderHLSLDemo.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "ShaderAsmDemo.resx"
-                    DependentUpon = "ShaderAsmDemo.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "VertexShader.vsh"
+                    RelPath = "ShaderHLSLDemo.resx"
+                    DependentUpon = "ShaderHLSLDemo.cs"
                     BuildAction = "EmbeddedResource"
                 />
             </Include>

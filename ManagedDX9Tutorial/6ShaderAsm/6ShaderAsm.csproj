@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{1C96DABF-C79E-4044-AAE0-4D46978AA764}"
+        ProjectGuid = "{E1B13314-E3E5-4065-9F3E-1B2906D525D6}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "4_Texture"
+                AssemblyName = "6ShaderAsm"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "WinExe"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "_4_Texture"
+                RootNamespace = "_6ShaderAsm"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -87,15 +87,15 @@
                     AssemblyFolderKey = "hklm\current managed directx 9.1"
                 />
                 <Reference
-                    Name = "System"
-                    AssemblyName = "System"
-                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"
-                />
-                <Reference
                     Name = "Microsoft.DirectX.Direct3DX"
                     AssemblyName = "Microsoft.DirectX.Direct3DX"
                     HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.Direct3DX.dll"
                     AssemblyFolderKey = "hklm\current managed directx 9.1"
+                />
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"
                 />
             </References>
         </Build>
@@ -106,13 +106,21 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "TextureDemo.cs"
+                    RelPath = "PixelShader.psh"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "ShaderAsmDemo.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TextureDemo.resx"
-                    DependentUpon = "TextureDemo.cs"
+                    RelPath = "ShaderAsmDemo.resx"
+                    DependentUpon = "ShaderAsmDemo.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "VertexShader.vsh"
                     BuildAction = "EmbeddedResource"
                 />
             </Include>

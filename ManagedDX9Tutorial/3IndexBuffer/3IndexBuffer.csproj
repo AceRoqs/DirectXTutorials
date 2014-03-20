@@ -9,7 +9,7 @@
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "3_IndexBuffer"
+                AssemblyName = "3IndexBuffer"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "WinExe"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "_3_IndexBuffer"
+                RootNamespace = "_3IndexBuffer"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
