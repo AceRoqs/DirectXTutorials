@@ -1,29 +1,29 @@
 Microsoft Visual Studio Solution File, Format Version 8.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1_Basic", "1_BasicDemo\1_Basic.csproj", "{7F9D1436-251C-47CD-8FCD-0B152C972DA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1Basic", "1BasicDemo\1Basic.csproj", "{7F9D1436-251C-47CD-8FCD-0B152C972DA1}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2_VertexBuffer", "2_VertexBuffer\2_VertexBuffer.csproj", "{CAEA9A04-882C-4515-A42A-97AFB22F8986}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2VertexBuffer", "2VertexBuffer\2VertexBuffer.csproj", "{CAEA9A04-882C-4515-A42A-97AFB22F8986}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3_IndexBuffer", "3_IndexBuffer\3_IndexBuffer.csproj", "{0B2599B7-D724-4F03-96E5-A2AD643CC511}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3IndexBuffer", "3IndexBuffer\3IndexBuffer.csproj", "{0B2599B7-D724-4F03-96E5-A2AD643CC511}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4_Texture", "4_Texture\4_Texture.csproj", "{1C96DABF-C79E-4044-AAE0-4D46978AA764}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4Texture", "4Texture\4Texture.csproj", "{1C96DABF-C79E-4044-AAE0-4D46978AA764}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5_Cube", "5_Cube\5_Cube.csproj", "{72598A99-F1DF-41E9-89AC-9541F00DF504}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5Cube", "5Cube\5Cube.csproj", "{72598A99-F1DF-41E9-89AC-9541F00DF504}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6_ShaderAsm", "6_ShaderAsm\6_ShaderAsm.csproj", "{E1B13314-E3E5-4065-9F3E-1B2906D525D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6ShaderAsm", "6ShaderAsm\6ShaderAsm.csproj", "{E1B13314-E3E5-4065-9F3E-1B2906D525D6}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7_ShaderHLSL", "7_ShaderHLSL\7_ShaderHLSL.csproj", "{D229E0FA-3F38-4D26-86E7-C563EA3302FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7ShaderHLSL", "7ShaderHLSL\7ShaderHLSL.csproj", "{D229E0FA-3F38-4D26-86E7-C563EA3302FC}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject

@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{72598A99-F1DF-41E9-89AC-9541F00DF504}"
+        ProjectGuid = "{CAEA9A04-882C-4515-A42A-97AFB22F8986}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "5_Cube"
+                AssemblyName = "2VertexBuffer"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "WinExe"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "_5_Cube"
+                RootNamespace = "_2VertexBuffer"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -67,52 +67,42 @@
                 <Reference
                     Name = "System.Drawing"
                     AssemblyName = "System.Drawing"
-                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
+                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
                 />
                 <Reference
                     Name = "System.Windows.Forms"
                     AssemblyName = "System.Windows.Forms"
-                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Windows.Forms.dll"
+                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Windows.Forms.dll"
                 />
                 <Reference
                     Name = "Microsoft.DirectX"
                     AssemblyName = "Microsoft.DirectX"
-                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.dll"
+                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.dll"
                     AssemblyFolderKey = "hklm\current managed directx 9.1"
                 />
                 <Reference
                     Name = "Microsoft.DirectX.Direct3D"
                     AssemblyName = "Microsoft.DirectX.Direct3D"
-                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.Direct3D.dll"
-                    AssemblyFolderKey = "hklm\current managed directx 9.1"
-                />
-                <Reference
-                    Name = "Microsoft.DirectX.Direct3DX"
-                    AssemblyName = "Microsoft.DirectX.Direct3DX"
-                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.Direct3DX.dll"
+                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.Direct3D.dll"
                     AssemblyFolderKey = "hklm\current managed directx 9.1"
                 />
                 <Reference
                     Name = "System"
                     AssemblyName = "System"
-                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"
                 />
             </References>
         </Build>
         <Files>
             <Include>
                 <File
-                    RelPath = "CubeDemo.cs"
+                    RelPath = "VertexBufferDemo.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "CubeDemo.resx"
-                    DependentUpon = "CubeDemo.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "photo.png"
+                    RelPath = "VertexBufferDemo.resx"
+                    DependentUpon = "VertexBufferDemo.cs"
                     BuildAction = "EmbeddedResource"
                 />
             </Include>

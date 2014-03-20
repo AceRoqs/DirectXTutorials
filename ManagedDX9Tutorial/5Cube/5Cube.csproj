@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{D229E0FA-3F38-4D26-86E7-C563EA3302FC}"
+        ProjectGuid = "{72598A99-F1DF-41E9-89AC-9541F00DF504}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "7_ShaderHLSL"
+                AssemblyName = "5Cube"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "WinExe"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "_7_ShaderHLSL"
+                RootNamespace = "_5Cube"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -102,21 +102,17 @@
         <Files>
             <Include>
                 <File
-                    RelPath = "photo.png"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "Shader.fx"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "ShaderHLSLDemo.cs"
+                    RelPath = "CubeDemo.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "ShaderHLSLDemo.resx"
-                    DependentUpon = "ShaderHLSLDemo.cs"
+                    RelPath = "CubeDemo.resx"
+                    DependentUpon = "CubeDemo.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "photo.png"
                     BuildAction = "EmbeddedResource"
                 />
             </Include>
