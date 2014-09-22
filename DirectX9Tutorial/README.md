@@ -4,7 +4,7 @@ the corresponding demos in the
 [ManagedDX9Tutorial](https://github.com/AceRoqs/directx_tutorials/tree/master/ManagedDX9Tutorial)
 series, though I never published the C++ version previously.
 
-This code was compiled with Visual C++ 2010, though porting it to
+This code was compiled with Visual C++ 2013, though porting it to
 previous versions of Visual C++ should be trivial as the code was
 originally developed on Visual C++ 2003 and no C++11 features are used.
 
