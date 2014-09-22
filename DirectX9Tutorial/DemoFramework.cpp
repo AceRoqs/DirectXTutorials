@@ -44,7 +44,7 @@ LRESULT CALLBACK WndProc(_In_ HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam
 }
 
 // The main purpose of this function is to build a window and call the hook functions.
-int WINAPI WinMain(_In_ HINSTANCE hInstance, HINSTANCE, LPSTR, int iCmdShow)
+int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int iCmdShow)
 {
     const TCHAR szClassName[] = TEXT("DirectX 9 Tutorial");
 

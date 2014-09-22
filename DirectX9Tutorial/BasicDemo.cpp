@@ -19,7 +19,7 @@ limitations under the License.
 #pragma warning(disable:4127)  // Conditional expression is constant.
 
 template<typename Ty>
-void HELPER_RELEASE(_In_opt_ Ty ** pointer)
+void HELPER_RELEASE(_In_ Ty ** pointer)
 {
     if(nullptr != *pointer)
     {
