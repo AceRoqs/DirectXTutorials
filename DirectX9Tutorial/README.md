@@ -20,5 +20,8 @@ lack of precompiled headers\) are taken for clarity.
 * Sample 5: Spins a cube of textured triangles.
 * Sample 6: Uses assembly shaders instead of a fixed function pipeline.
 
+The [DirectX SDK \(June 2010\)](http://www.microsoft.com/en-us/download/details.aspx?id=6812)
+is the latest DirectX SDK as of 2015, and is required to build these examples.
+
 Toby Jones \([www.turbohex.com](http://www.turbohex.com), [ace.roqs.net](http://ace.roqs.net)\)
 
