@@ -12,7 +12,7 @@ void HELPER_RELEASE(_In_ Ty ** pointer)
     }
 }
 
-const PCTSTR FILENAME = TEXT("photo.png");
+const PCTSTR FILENAME = TEXT("Photo.png");
 
 // In general, these will not be global, and should be wrapped in a smart pointer.
 IDirect3D9 * pID3D                     = nullptr;
