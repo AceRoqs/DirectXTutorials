@@ -22,6 +22,8 @@ lack of precompiled headers\) are taken for clarity.
 
 The [DirectX SDK \(June 2010\)](http://www.microsoft.com/en-us/download/details.aspx?id=6812)
 is the latest DirectX SDK as of 2015, and is required to build these examples.
+[KB 2728613](https://support.microsoft.com/kb/2728613/en-us) will likely be
+required on modern systems.
 
 Toby Jones \([www.turbohex.com](http://www.turbohex.com), [ace.roqs.net](http://ace.roqs.net)\)
 
