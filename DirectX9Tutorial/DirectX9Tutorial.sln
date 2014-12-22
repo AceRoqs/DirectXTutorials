@@ -1,5 +1,8 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1BasicDemo", "1BasicDemo\1BasicDemo.vcxproj", "{67E14C6A-B5A2-F86D-BDD9-249B757377CA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2VertexBuffer", "2VertexBuffer\2VertexBuffer.vcxproj", "{E37144F7-F9D7-DA98-DFD6-77DDEF31AE32}"
