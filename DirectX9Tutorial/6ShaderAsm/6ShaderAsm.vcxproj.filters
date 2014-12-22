@@ -7,7 +7,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\ShaderDemo.cpp">
+    <ClCompile Include="ShaderDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\DemoFramework.cpp">

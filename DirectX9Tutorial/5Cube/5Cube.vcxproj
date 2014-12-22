@@ -174,7 +174,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\CubeDemo.cpp" />
+    <ClCompile Include="CubeDemo.cpp" />
     <ClCompile Include="..\DemoFramework.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -7,7 +7,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\BasicDemo.cpp">
+    <ClCompile Include="BasicDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\DemoFramework.cpp">

@@ -7,7 +7,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\VertexBufferDemo.cpp">
+    <ClCompile Include="VertexBufferDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\DemoFramework.cpp">
