@@ -1,6 +1,6 @@
 #include <d3dx9.h>
 
-#pragma warning(disable:4127)  // Conditional expression is constant.
+#define ONCE ((void)0, false)
 
 template<typename Ty>
 void HELPER_RELEASE(_In_ Ty ** pointer)
@@ -164,7 +164,7 @@ HRESULT InitDirect3D(_In_ HWND hwnd)
         }
 
         hr = pID3DDevice->SetTexture(0, pTexture);
-    } while(false);
+    } while(ONCE);
 
     return hr;
 }
@@ -222,7 +222,7 @@ HRESULT DrawScene()
 
         // flip back buffer to front
         hr = pID3DDevice->Present(nullptr, nullptr, nullptr, nullptr);
-    } while(false);
+    } while(ONCE);
 
     return hr;
 }
