@@ -1,18 +1,13 @@
-# Resource compiler artifacts.
-*.aps
-
-# Project file artifacts.
-*.user
-
 # Solution file artifacts.
-/*.sdf
-/*.suo
 /*.opensdf
+*.sdf
+/*.VC.opendb
+.vs
 
 # Output folders.
-/ARM.*
-/Win32.*
-/x64.*
+ARM.*
+Win32.*
+x64.*
 
 # Intellisense artifacts.
 /ipch
