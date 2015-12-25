@@ -9,7 +9,7 @@ SDK, which wasn't the case in the early 2000's.
 
 Most of the code is compiled with Visual Studio and SDK versions that are
 no longer available, so I left the code as it was written. The C++ DirectX
-9 code I have ported to Visual C++ 2013 just to keep it up to date, but it
+9 code I have ported to Visual C++ 2015 just to keep it up to date, but it
 doesn't really reflect my current practices. Perhaps it might be useful to
 someone.
 
