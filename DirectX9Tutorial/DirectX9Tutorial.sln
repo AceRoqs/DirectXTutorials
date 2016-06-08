@@ -1,8 +1,8 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
-MinimumVisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 14.0.25123.0
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1BasicDemo", "1BasicDemo\1BasicDemo.vcxproj", "{67E14C6A-B5A2-F86D-BDD9-249B757377CA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2VertexBuffer", "2VertexBuffer\2VertexBuffer.vcxproj", "{E37144F7-F9D7-DA98-DFD6-77DDEF31AE32}"
